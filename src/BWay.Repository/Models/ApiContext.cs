@@ -16,10 +16,14 @@ namespace BWay.Repository.Models
 
             modelBuilder.Entity<ProjetoModel>()
                 .HasKey(k => new { k.Id });
+
+            modelBuilder.Entity<CorretorRoletaModel>()
+                .HasKey(k => new { k.IdRoleta, k.IdOperacacao, k.IdCorretor });
         }
 
         public DbSet<PlantaoModel> Plantoes { get; set; }
         public DbSet<ProjetoModel> Projetos { get; set; }
+        public DbSet<CorretorRoletaModel> Corretores { get; set; }
 
     }
 }

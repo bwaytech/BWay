@@ -15,11 +15,23 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
+builder.Services.AddScoped<IOperacaoCorretorRepository, OperacaoCorretorRepository>();
+builder.Services.AddScoped<IOperacaoRepository, OperacaoRepository>();
 builder.Services.AddScoped<IPlantaoRepository, PlantaoRepository>();
 builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
+builder.Services.AddScoped<IRoletaRepository, RoletaRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
+builder.Services.AddScoped<IAtendimentoService, AtendimentoService>();
+builder.Services.AddScoped<IAutenticacaoService, AutenticacaoService>();
+builder.Services.AddScoped<ICorretorService, CorretorService>();
+builder.Services.AddScoped<IOperacaoCorretorService, OperacaoCorretorService>();
+builder.Services.AddScoped<IOperacaoService, OperacaoService>();
 builder.Services.AddScoped<IPlantaoService, PlantaoService>();
 builder.Services.AddScoped<IProjetoService, ProjetoService>();
+builder.Services.AddScoped<IRoletaService, RoletaService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 var mapperConfig = new MapperConfiguration(mc =>
 {
