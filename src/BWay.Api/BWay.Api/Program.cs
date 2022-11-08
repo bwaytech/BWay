@@ -1,4 +1,6 @@
 using AutoMapper;
+using BWay.Infra.Interfaces;
+using BWay.Infra.Utils;
 using BWay.Repository.Interfaces;
 using BWay.Repository.Models;
 using BWay.Repository.Repositories;
@@ -32,6 +34,8 @@ builder.Services.AddScoped<IPlantaoService, PlantaoService>();
 builder.Services.AddScoped<IProjetoService, ProjetoService>();
 builder.Services.AddScoped<IRoletaService, RoletaService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
+builder.Services.AddScoped<IUtil, Util>();
 
 var mapperConfig = new MapperConfiguration(mc =>
 {

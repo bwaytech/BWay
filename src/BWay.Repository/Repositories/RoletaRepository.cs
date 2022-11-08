@@ -11,9 +11,9 @@ namespace BWay.Repository.Repositories
 
         private static List<CorretorRoletaModel> roleta = new List<CorretorRoletaModel>();
 
-        public RoletaRepository(ApiContext context, IUtil util)
+        public RoletaRepository(IUtil util)
         {
-            _context = context;
+            _context = new ApiContext();
             _util = util;
         }
 
