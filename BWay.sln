@@ -26,7 +26,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateTables", "CreateTable
 		Create.sql = Create.sql
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inserts", "Inserts", "{1C6354B9-1CE0-4A3B-A3FA-BDE395F06AA2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InsertsDominio", "InsertsDominio", "{1C6354B9-1CE0-4A3B-A3FA-BDE395F06AA2}"
+	ProjectSection(SolutionItems) = preProject
+		PerfilUsuario.sql = PerfilUsuario.sql
+		StatusCorretorRoleta.sql = StatusCorretorRoleta.sql
+		StatusUsuario.sql = StatusUsuario.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
