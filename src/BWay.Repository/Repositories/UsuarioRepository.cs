@@ -40,6 +40,32 @@ namespace BWay.Repository.Repositories
             }
         }
 
+        public UsuarioDTO BuscarUsuarioPorId(string idUsuario)
+        {
+            try
+            {
+                return _session.Connection.QueryFirstOrDefault<UsuarioDTO>(@"
+                    SELECT
+                        ID AS Id
+                    ,   ID_PERFIL_USUARIO AS IdPerfilUsuario
+                    ,   NOME AS Nome
+                    ,   EMAIL AS Email
+                    ,   ID_STATUS_USUARIO AS StatusUsuario
+                    ,   DT_CRIACAO AS DataCriacao
+                    FROM USUARIO
+                    WHERE ID = @IdUsuario"
+                , new
+                {
+                    IdUsuario = idUsuario
+                }
+                , commandType: CommandType.Text, transaction: _session.Transaction);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public string CadastrarUsuario(UsuarioModel usuario)
         {
             try

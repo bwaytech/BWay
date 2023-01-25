@@ -74,6 +74,25 @@ namespace BWay.Api.Controllers
 
         }
 
+        [HttpGet("{idUsuario}/consultarPorId")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
+        public IActionResult CadastrarUsuario(string idUsuario)
+        {
+            try
+            {
+                var retorno = _usuarioService.BuscarUsuarioPorId(idUsuario);
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+
+        }
+
         [HttpPost("cadastrar")]
         [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
         public IActionResult CadastrarUsuario([FromBody] UsuarioModel usuario)

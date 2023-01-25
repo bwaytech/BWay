@@ -54,6 +54,18 @@ namespace BWay.Service.Services
             }
         }
 
+        public UsuarioDTO BuscarUsuarioPorId(string idUsuario)
+        {
+            try
+            {
+                return _usuarioRepository.BuscarUsuarioPorId(idUsuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public string CadastrarUsuario(UsuarioModel usuario)
         {
             try

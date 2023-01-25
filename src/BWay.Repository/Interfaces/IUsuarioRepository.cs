@@ -13,6 +13,7 @@ namespace BWay.Repository.Interfaces
         //UsuarioModel AutenticarLogin(string login, string senha);
 
         List<UsuarioDTO> ListarUsuarios();
+        UsuarioDTO BuscarUsuarioPorId(string idUsuario);
         string CadastrarUsuario(UsuarioModel usuario);
         string AtualizarUsuario(string idUsuario, UsuarioModel usuario);
         string ExcluirUsuario(string idUsuario);
