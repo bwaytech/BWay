@@ -1,4 +1,5 @@
 ﻿using BWay.Infra.Exceptions;
+using BWay.Infra.Models;
 using BWay.Repository.Interfaces;
 using BWay.Repository.Models;
 using BWay.Service.DTOs;
@@ -27,34 +28,34 @@ namespace BWay.Service.Services
             _configuration = configuration;
         }
 
-        public TokenDTO AutenticarUsuario(string login, string senha)
-        {
-            var usuario = _usuarioRepository.AutenticarLogin(login, senha);
+        //public TokenDTO AutenticarUsuario(string login, string senha)
+        //{
+        //    var usuario = _usuarioRepository.AutenticarLogin(login, senha);
 
-            if (usuario == null) throw new HttpImobException(HttpStatusCode.NotFound, "Usuario ou senha inválidos.");
+        //    if (usuario == null) throw new HttpImobException(HttpStatusCode.NotFound, "Usuario ou senha inválidos.");
 
-            return new TokenDTO
-            {
-                Token = GerarToken(usuario)
-            };
-        }
+        //    return new TokenDTO
+        //    {
+        //        Token = GerarToken(usuario)
+        //    };
+        //}
 
-        private string GerarToken(UsuarioModel model)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration["Secret"]);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.NameIdentifier, model.Id.ToString()),
-                    new Claim(ClaimTypes.Role, model.Perfil)
-                }),
-                Expires = DateTime.UtcNow.AddHours(15),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
-        }
+        //private string GerarToken(UsuarioModel model)
+        //{
+        //    var tokenHandler = new JwtSecurityTokenHandler();
+        //    var key = Encoding.ASCII.GetBytes(_configuration["Secret"]);
+        //    var tokenDescriptor = new SecurityTokenDescriptor
+        //    {
+        //        Subject = new ClaimsIdentity(new Claim[]
+        //        {
+        //            new Claim(ClaimTypes.NameIdentifier, model.Id.ToString()),
+        //            new Claim(ClaimTypes.Role, model.Perfil)
+        //        }),
+        //        Expires = DateTime.UtcNow.AddHours(15),
+        //        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+        //    };
+        //    var token = tokenHandler.CreateToken(tokenDescriptor);
+        //    return tokenHandler.WriteToken(token);
+        //}
     }
 }

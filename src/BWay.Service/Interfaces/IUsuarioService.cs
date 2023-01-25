@@ -1,12 +1,15 @@
-﻿using BWay.Service.DTOs;
+﻿using BWay.Infra.Models;
+using BWay.Service.DTOs;
 
 namespace BWay.Service.Interfaces
 {
     public interface IUsuarioService
     {
-        UsuarioDTO ObterUsuario(int id);
-        List<UsuarioDTO> ObterTodos();
-        void Inserir(UsuarioDTO usuario);
-        void Deletar(int id);
+        //UsuarioDTO ObterUsuario(int id);
+        //List<UsuarioDTO> ObterTodos();
+        //void Inserir(UsuarioDTO usuario);
+        //void Deletar(int id);
+
+        string CadastrarUsuario(UsuarioModel usuario);
     }
 }

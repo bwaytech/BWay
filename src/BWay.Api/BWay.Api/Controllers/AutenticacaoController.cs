@@ -15,14 +15,14 @@ namespace BWay.Api.Controllers
             _autenticacaoService = autenticacaoService;
         }
 
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TokenDTO))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [AllowAnonymous]
-        public IActionResult AutenticarUsuario(AutenticacaoDTO autenticacao)
-        {
-            var retorno = _autenticacaoService.AutenticarUsuario(autenticacao.Login, autenticacao.Senha);
-            return Ok(retorno);
-        }
+        //[HttpPost]
+        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TokenDTO))]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[AllowAnonymous]
+        //public IActionResult AutenticarUsuario(AutenticacaoDTO autenticacao)
+        //{
+        //    var retorno = _autenticacaoService.AutenticarUsuario(autenticacao.Login, autenticacao.Senha);
+        //    return Ok(retorno);
+        //}
     }
 }

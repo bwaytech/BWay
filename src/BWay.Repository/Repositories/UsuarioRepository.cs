@@ -1,39 +1,90 @@
-﻿using BWay.Repository.Interfaces;
-using BWay.Repository.Models;
+﻿using BWay.Infra.Data;
+using BWay.Infra.Models;
+using BWay.Repository.Interfaces;
+using Dapper;
+using System.Data;
 
 namespace BWay.Repository.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private static List<UsuarioModel> usuarios = new List<UsuarioModel>{
-                new UsuarioModel(1, "Conra","csilva", "senha1", "gerente"),
-                new UsuarioModel(2, "Bruno", "boliveira", "senha2", "corretor"),
-                new UsuarioModel(3, "Gerson", "gsantos", "senha3", "atendente")
-            };
+        private IUnitOfWork _unitOfWork;
+        private DbSession _session;
 
-        public UsuarioModel? ObterUsuario(int id)
+        public UsuarioRepository(IUnitOfWork unitOfWork, DbSession session)
         {
-            return usuarios.Find(usuario => usuario.Id.Equals(id));
+            _unitOfWork = unitOfWork;
+            _session = session;
         }
 
-        public List<UsuarioModel> ObterTodos()
+        public string CadastrarUsuario(UsuarioModel usuario)
         {
-            return usuarios;
+            try
+            {
+                var emailCadastrado = ValidaEmailUsuario(usuario.Email);
+
+                if (emailCadastrado)
+                    throw new Exception("Email já cadastrado.");
+                
+                var idUsuario = _session.Connection.QuerySingle<Guid>(@"
+                    INSERT INTO USUARIO(
+                        ID_PERFIL_USUARIO
+                    ,   NOME
+                    ,   EMAIL
+                    ,   SENHA
+                    ,   ID_STATUS_USUARIO
+                    ,   DT_CRIACAO
+                    )
+                    OUTPUT INSERTED.ID
+                    VALUES(
+                        @IdPerfilUsuario
+                    ,   @Nome
+                    ,   @Email
+                    ,   @Senha
+                    ,   @IdStatusUsuario
+                    ,   GETDATE())"
+                , new
+                {
+                    IdPerfilUsuario = usuario.IdPerfilUsuario,
+                    Nome = usuario.Nome,
+                    Email = usuario.Email,
+                    Senha = usuario.Senha,
+                    IdStatusUsuario = usuario.IdStatusUsuario
+                }
+                , commandType: CommandType.Text, transaction: _session.Transaction);
+
+                return $"Usuario: {idUsuario}";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public void Inserir(UsuarioModel usuarioModel)
+        private bool ValidaEmailUsuario(string email)
         {
-            usuarios.Add(usuarioModel);
+            try
+            {
+                var emailUsuario = _session.Connection.Query<string>(@"
+                    SELECT
+                        EMAIL
+                    FROM USUARIO
+                    WHERE EMAIL = @email"
+                , new
+                {
+                    email = email
+                }
+                , commandType: CommandType.Text, transaction: _session.Transaction).FirstOrDefault();
+
+                return !String.IsNullOrEmpty(emailUsuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
         }
 
-        public void Deletar(int id)
-        {
-            usuarios.RemoveAll(usuario => usuario.Id.Equals(id));
-        }
-
-        public UsuarioModel? AutenticarLogin(string login, string senha)
-        {
-            return usuarios.Where(x => x.Login.ToLower() == login.ToLower() && x.Senha == senha).FirstOrDefault();
-        }
     }
 }
+    

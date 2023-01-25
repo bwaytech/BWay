@@ -8,8 +8,8 @@ namespace BWay.Service.Mappings
     {
         public UsuarioProfile()
         {
-            CreateMap<UsuarioDTO, UsuarioModel>();
-            CreateMap<UsuarioModel, UsuarioDTO>();
+            //CreateMap<UsuarioDTO, UsuarioModel>();
+            //CreateMap<UsuarioModel, UsuarioDTO>();
         }
     }
 }
