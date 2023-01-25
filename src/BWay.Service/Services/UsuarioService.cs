@@ -1,23 +1,20 @@
 ﻿using AutoMapper;
-using BWay.Infra.Exceptions;
+using BWay.Infra.DTOs;
 using BWay.Infra.Models;
 using BWay.Repository.Interfaces;
-using BWay.Repository.Models;
-using BWay.Service.DTOs;
 using BWay.Service.Interfaces;
-using System.Net;
 
 namespace BWay.Service.Services
 {
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
 
         public UsuarioService(IUsuarioRepository usuarioRepository, IMapper mapper)
         {
             _usuarioRepository = usuarioRepository;
-            _mapper = mapper;
+            //_mapper = mapper;
         }
 
         //public UsuarioDTO ObterUsuario(int id)
@@ -45,11 +42,47 @@ namespace BWay.Service.Services
         //    _usuarioRepository.Deletar(id);
         //}
 
+        public List<UsuarioDTO> ListarUsuarios()
+        {
+            try
+            {
+                return _usuarioRepository.ListarUsuarios();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public string CadastrarUsuario(UsuarioModel usuario)
         {
             try
             {
                 return _usuarioRepository.CadastrarUsuario(usuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string AtualizarUsuario(string idUsuario, UsuarioModel usuario)
+        {
+            try
+            {
+                return _usuarioRepository.AtualizarUsuario(idUsuario, usuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string ExcluirUsuario(string idUsuario)
+        {
+            try
+            {
+                return _usuarioRepository.ExcluirUsuario(idUsuario);
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
-﻿using BWay.Infra.Models;
+﻿using BWay.Infra.DTOs;
+using BWay.Infra.Models;
 using BWay.Repository.Models;
 
 namespace BWay.Repository.Interfaces
@@ -11,6 +12,9 @@ namespace BWay.Repository.Interfaces
         //void Deletar(int id);
         //UsuarioModel AutenticarLogin(string login, string senha);
 
+        List<UsuarioDTO> ListarUsuarios();
         string CadastrarUsuario(UsuarioModel usuario);
+        string AtualizarUsuario(string idUsuario, UsuarioModel usuario);
+        string ExcluirUsuario(string idUsuario);
     }
 }

@@ -1,5 +1,5 @@
-﻿using BWay.Infra.Models;
-using BWay.Service.DTOs;
+﻿using BWay.Infra.DTOs;
+using BWay.Infra.Models;
 
 namespace BWay.Service.Interfaces
 {
@@ -10,6 +10,9 @@ namespace BWay.Service.Interfaces
         //void Inserir(UsuarioDTO usuario);
         //void Deletar(int id);
 
+        List<UsuarioDTO> ListarUsuarios();
         string CadastrarUsuario(UsuarioModel usuario);
+        string AtualizarUsuario(string idUsuario, UsuarioModel usuario);
+        string ExcluirUsuario(string idUsuario);
     }
 }

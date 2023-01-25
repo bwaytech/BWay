@@ -55,8 +55,27 @@ namespace BWay.Api.Controllers
         //    return NoContent();
         //}
 
+        [HttpGet("consultar")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
+        public IActionResult CadastrarUsuario()
+        {
+            try
+            {
+                var retorno = _usuarioService.ListarUsuarios();
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+
+        }
+
         [HttpPost("cadastrar")]
-        [ProducesResponseType(typeof(bool), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
         public IActionResult CadastrarUsuario([FromBody] UsuarioModel usuario)
         {
             try
@@ -72,6 +91,44 @@ namespace BWay.Api.Controllers
                 });                
             }
             
+        }
+
+        [HttpPut("{idUsuario}/atualizar")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        public IActionResult AtualizarUsuario(string idUsuario, [FromBody] UsuarioModel usuario)
+        {
+            try
+            {
+                var retorno = _usuarioService.AtualizarUsuario(idUsuario, usuario);
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+
+        }
+
+        [HttpDelete("{idUsuario}/excluir")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        public IActionResult ExcluirUsuario(string idUsuario)
+        {
+            try
+            {
+                var retorno = _usuarioService.ExcluirUsuario(idUsuario);
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+
         }
     }
 }

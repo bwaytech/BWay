@@ -8,6 +8,7 @@ namespace BWay.Infra.Models
 {
     public class UsuarioModel
     {
+        //public Guid? idUsuario { get; set; }
         public int IdPerfilUsuario { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
