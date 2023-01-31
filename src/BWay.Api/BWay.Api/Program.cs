@@ -41,8 +41,11 @@ builder.Services.AddScoped<DbSession>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 
-builder.Services.AddScoped<IUsuarioService, UsuarioService>(); 
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IProjetoService, ProjetoService>();
+
 
 builder.Services.AddScoped<IUtil, Util>();
 

@@ -1,5 +1,7 @@
-﻿using BWay.Service.DTOs;
+﻿using BWay.Infra.Models;
+using BWay.Service.DTOs;
 using BWay.Service.Interfaces;
+using BWay.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BWay.Api.Controllers
@@ -15,37 +17,99 @@ namespace BWay.Api.Controllers
             _projetoService = projetoService;
         }
 
-        [HttpGet]
-        public IEnumerable<ProjetoDTO> GetProjetos()
+        [HttpGet("consultar")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        public IActionResult ListarProjetos()
         {
-            var projetos = _projetoService.ObterTodos();
-            return projetos;
+            try
+            {
+                var retorno = _projetoService.ListarProjetos();
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+
         }
 
-        [HttpGet("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProjetoDTO))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetProjeto(int id)
+        [HttpGet("{idProjeto}/consultarPorId")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        public IActionResult ConsultarProjetoPorId(string idProjeto)
         {
-            var projetoSelecionado = _projetoService.ObterProjeto(id);
-            return Ok(projetoSelecionado);
+            try
+            {
+                var retorno = _projetoService.BuscarProjetoPorId(idProjeto);
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+
         }
 
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult Post(ProjetoDTO projeto)
+        [HttpPost("cadastrar")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
+        public IActionResult CadastrarProjeto([FromBody] ProjetoModel projeto)
         {
-            var projetoCriado = _projetoService.Inserir(projeto);
-            return CreatedAtAction(nameof(GetProjeto), new { id = projeto.Id }, projetoCriado);
+            try
+            {
+                var retorno = _projetoService.CadastrarProjeto(projeto);
+                return Created("cadastrar", retorno);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+
         }
 
-        [HttpDelete("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Delete(int id)
+        [HttpPut("{idProjeto}/atualizar")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        public IActionResult AtualizarUsuario(string idProjeto, [FromBody] ProjetoModel projeto)
         {
-            _projetoService.Deletar(id);
-            return NoContent();
+            try
+            {
+                var retorno = _projetoService.AtualizarProjeto(idProjeto, projeto);
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+
+        }
+
+        [HttpDelete("{idProjeto}/excluir")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        public IActionResult ExcluirProjeto(string idProjeto)
+        {
+            try
+            {
+                var retorno = _projetoService.ExcluirProjeto(idProjeto);
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+
         }
     }
 }

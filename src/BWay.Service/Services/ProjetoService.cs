@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
-using BWay.Infra.Exceptions;
+using BWay.Infra.DTOs;
+using BWay.Infra.Models;
 using BWay.Repository.Interfaces;
-using BWay.Repository.Models;
-using BWay.Service.DTOs;
 using BWay.Service.Interfaces;
-using System.Net;
 
 namespace BWay.Service.Services
 {
@@ -12,38 +10,72 @@ namespace BWay.Service.Services
     {
         private readonly IProjetoRepository _projetoRepository;
 
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
 
         public ProjetoService(IProjetoRepository projetoRepository, IMapper mapper)
         {
             _projetoRepository = projetoRepository;
-            _mapper = mapper;
+            //_mapper = mapper;
         }
 
-        public ProjetoDTO ObterProjeto(int id)
+        public List<ProjetoDTO> ListarProjetos()
         {
-            var projeto = _projetoRepository.ObterProjeto(id);
-            if (projeto == null) throw new HttpImobException(HttpStatusCode.NotFound, "Projeto não encontrado.");
-
-            return _mapper.Map<ProjetoDTO>(projeto);
+            try
+            {
+                return _projetoRepository.ListarProjetos();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public List<ProjetoDTO> ObterTodos()
+        public ProjetoDTO BuscarProjetoPorId(string idProjeto)
         {
-            var projetos = _projetoRepository.ObterTodos();
-            return _mapper.Map<List<ProjetoDTO>>(projetos);
+            try
+            {
+                return _projetoRepository.BuscarProjetoPorId(idProjeto);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public ProjetoDTO Inserir(ProjetoDTO projeto)
+        public string CadastrarProjeto(ProjetoModel projeto)
         {
-            var projetoCriado = _projetoRepository.Inserir(_mapper.Map<ProjetoModel>(projeto));
-            return _mapper.Map<ProjetoDTO>(projetoCriado);
+            try
+            {
+                return _projetoRepository.CadastrarProjeto(projeto);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public void Deletar(int id)
+        public string AtualizarProjeto(string idProjeto, ProjetoModel projeto)
         {
-            var projeto = ObterProjeto(id);
-            _projetoRepository.Deletar(_mapper.Map<ProjetoModel>(projeto));
+            try
+            {
+                return _projetoRepository.AtualizarProjeto(idProjeto, projeto);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string ExcluirProjeto(string idProjeto)
+        {
+            try
+            {
+                return _projetoRepository.ExcluirProjeto(idProjeto);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

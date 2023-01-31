@@ -1,12 +1,15 @@
-﻿using BWay.Service.DTOs;
+﻿using BWay.Infra.DTOs;
+using BWay.Infra.Models;
 
 namespace BWay.Service.Interfaces
 {
     public interface IProjetoService
     {
-        ProjetoDTO ObterProjeto(int id);
-        List<ProjetoDTO> ObterTodos();
-        ProjetoDTO Inserir(ProjetoDTO projeto);
-        void Deletar(int id);
+        List<ProjetoDTO> ListarProjetos();
+        ProjetoDTO BuscarProjetoPorId(string idProjeto);
+        string CadastrarProjeto(ProjetoModel projeto);
+        string AtualizarProjeto(string idProjeto, ProjetoModel projeto);
+        string ExcluirProjeto(string idProjeto);
+
     }
 }

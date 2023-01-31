@@ -18,46 +18,10 @@ namespace BWay.Api.Controllers
             _usuarioService = usuarioService;
         }
 
-        //[HttpGet]
-        //[Authorize(Roles = "gerente")]
-        //public IEnumerable<UsuarioDTO> GetUsuarios()
-        //{
-        //    var usuarios = _usuarioService.ObterTodos();
-        //    return usuarios;
-        //}
-
-        //[HttpGet("{id:int}")]
-        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDTO))]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //[Authorize]
-        //public IActionResult GetUsuario(int id)
-        //{
-        //    var usuarioSelecionado = _usuarioService.ObterUsuario(id);
-        //    return Ok(usuarioSelecionado);
-        //}
-
-        //[HttpPost]
-        //[ProducesResponseType(StatusCodes.Status201Created)]
-        //[Authorize]
-        //public IActionResult Post(UsuarioDTO usuario)
-        //{
-        //    _usuarioService.Inserir(usuario);
-        //    return CreatedAtAction(nameof(GetUsuario), new { id = usuario.IdUsuario }, usuario);
-        //}
-
-        //[HttpDelete("{id:int}")]
-        //[ProducesResponseType(StatusCodes.Status204NoContent)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //[Authorize(Roles = "gerente")]
-        //public IActionResult Delete(int id)
-        //{
-        //    _usuarioService.Deletar(id);
-        //    return NoContent();
-        //}
-
+        
         [HttpGet("consultar")]
-        [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
-        public IActionResult CadastrarUsuario()
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        public IActionResult ListarUsuario()
         {
             try
             {
@@ -75,8 +39,8 @@ namespace BWay.Api.Controllers
         }
 
         [HttpGet("{idUsuario}/consultarPorId")]
-        [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
-        public IActionResult CadastrarUsuario(string idUsuario)
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        public IActionResult ConsultarUsuarioPorId(string idUsuario)
         {
             try
             {
