@@ -11,5 +11,6 @@ namespace BWay.Repository.Interfaces
         string CadastrarUsuario(UsuarioModel usuario);
         string AtualizarUsuario(string idUsuario, UsuarioModel usuario);
         string ExcluirUsuario(string idUsuario);
+        UsuarioDTO EfetuarLogin(LoginModel login);
     }
 }

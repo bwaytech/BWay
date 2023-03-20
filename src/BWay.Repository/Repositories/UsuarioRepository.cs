@@ -195,6 +195,34 @@ namespace BWay.Repository.Repositories
             
         }
 
+        public UsuarioDTO EfetuarLogin(LoginModel login)
+        {
+            try
+            {
+                return _session.Connection.QueryFirstOrDefault<UsuarioDTO>(@"
+                    SELECT
+                        ID AS Id
+                    ,   ID_PERFIL_USUARIO AS IdPerfilUsuario
+                    ,   NOME AS Nome
+                    ,   EMAIL AS Email
+                    ,   ID_STATUS_USUARIO AS StatusUsuario
+                    ,   DT_CRIACAO AS DataCriacao
+                    FROM USUARIO
+                    WHERE EMAIL = @Email
+                        AND SENHA = @Senha"
+                , new
+                {
+                    Email = login.Email,
+                    Senha = login.Senha
+                }
+                , commandType: CommandType.Text, transaction: _session.Transaction);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }
     
