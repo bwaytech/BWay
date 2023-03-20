@@ -113,5 +113,27 @@ namespace BWay.Api.Controllers
             }
 
         }
+
+        [HttpPost("login")]
+        [ProducesResponseType(typeof(UsuarioDTO), StatusCodes.Status200OK)]
+        public IActionResult LoginUsuario([FromBody] LoginModel login)
+        {
+            try
+            {
+                var retorno = _usuarioService.EfetuarLogin(login);
+                if (retorno == null)
+                    return Ok("Dados do usuário não encontrados.");
+
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+
+        }
     }
 }

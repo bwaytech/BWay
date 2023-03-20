@@ -76,5 +76,17 @@ namespace BWay.Service.Services
                 throw new Exception(ex.Message);
             }
         }
+
+        public UsuarioDTO EfetuarLogin(LoginModel login)
+        {
+            try
+            {
+                return _usuarioRepository.EfetuarLogin(login);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
