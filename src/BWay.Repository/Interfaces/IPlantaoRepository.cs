@@ -1,12 +1,25 @@
-﻿using BWay.Repository.Models;
+﻿using BWay.Infra.DTOs;
+using BWay.Infra.Models;
 
 namespace BWay.Repository.Interfaces
 {
     public interface IPlantaoRepository
     {
-        PlantaoModel ObterPlantao(int id);
-        List<PlantaoModel> ObterTodos();
-        PlantaoModel Inserir(PlantaoModel plantaoModel);
-        void Deletar(PlantaoModel plantaoModel);
+        #region LocalizacaoPlantao
+        List<LocalizacaoPlantaoDTO> ListarLocalizacaoPlantao();
+        LocalizacaoPlantaoDTO BuscarLocalizacaoPlantaoPorId(string idLocalizacaoPlantao);
+        string CadastrarLocalizacaoPlantao(LocalizacaoPlantaoModel localizacaoPlantao);
+        string AtualizarLocalizacaoPlantao(string idLocalizacaoPlantao, LocalizacaoPlantaoModel localizacaoPlantao);
+        string ExcluirLocalizacaoPlantao(string idLocalizacaoPlantao);
+        #endregion
+
+
+        #region Plantao
+        List<PlantaoDTO> ListarPlantao();
+        PlantaoDTO BuscarPlantaoPorId(string idPlantao);
+        string CadastrarPlantao(PlantaoModel plantao);
+        string AtualizarPlantao(string idPlantao, PlantaoModel plantao);
+        string ExcluirPlantao(string idPlantao);
+        #endregion
     }
 }
