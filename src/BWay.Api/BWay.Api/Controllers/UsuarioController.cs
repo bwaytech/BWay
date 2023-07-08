@@ -38,7 +38,7 @@ namespace BWay.Api.Controllers
 
         }
 
-        [HttpGet("{idUsuario}/consultarPorId")]
+        [HttpGet("consultarPorId/{idUsuario}")]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         public IActionResult ConsultarUsuarioPorId(string idUsuario)
         {
@@ -76,7 +76,7 @@ namespace BWay.Api.Controllers
             
         }
 
-        [HttpPut("{idUsuario}/atualizar")]
+        [HttpPut("atualizar/{idUsuario}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         public IActionResult AtualizarUsuario(string idUsuario, [FromBody] UsuarioModel usuario)
         {
@@ -95,7 +95,7 @@ namespace BWay.Api.Controllers
 
         }
 
-        [HttpDelete("{idUsuario}/excluir")]
+        [HttpDelete("excluir/{idUsuario}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         public IActionResult ExcluirUsuario(string idUsuario)
         {

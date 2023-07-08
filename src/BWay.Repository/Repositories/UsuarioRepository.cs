@@ -154,8 +154,9 @@ namespace BWay.Repository.Repositories
             try
             {
                 var linhasAfetadas = _session.Connection.Execute(@"
-                    DELETE FROM  
+                    UPDATE  
                         USUARIO
+                    SET ID_STATUS_USUARIO = 2
                     WHERE ID = @IdUsuario"
                 , new
                 {
