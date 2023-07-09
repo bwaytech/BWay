@@ -1,14 +1,18 @@
-﻿using BWay.Repository.Models;
+﻿using BWay.Infra.DTOs;
+using BWay.Infra.Models;
 
 namespace BWay.Repository.Interfaces
 {
     public interface IOperacaoRepository
     {
-        OperacaoModel CriarOperacao(OperacaoModel operacao);
-        OperacaoModel AbrirOperacao(int id);
-        OperacaoModel FecharOperacao(int id);
-        OperacaoModel ObterOperacaoAberta(int id);
-        OperacaoModel ObterOperacao(int id);
-        List<OperacaoModel> ObterOperacoes();
+        #region Operacao
+        List<OperacaoDTO> ListarOperacao();
+        OperacaoDTO BuscarOperacaoPorId(string idOperacao);
+        string CadastrarOperacao(OperacaoModel operacao);
+        string AtualizarOperacao(string idOperacao, OperacaoModel operacao);
+        string ExcluirOperacao(string idOperacao);
+        string AtualizarCodigoOperacao(string idOperacao, string codigoOperacao);
+        #endregion
+
     }
 }

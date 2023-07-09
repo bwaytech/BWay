@@ -33,7 +33,7 @@ namespace BWay.Service.Services
 
             if (operacaoCorretorExistente != null) return null;
 
-            var operacao = _operacaoService.ObterOperacaoAberta(operacaoCorretorDTO.IdOperacao);
+            var operacao = _operacaoService.BuscarOperacaoPorId("");
 
             if (operacao == null) return null;
 

@@ -1,7 +1,6 @@
-﻿using BWay.Repository.Interfaces;
-using BWay.Repository.Models;
-using BWay.Service.Converters;
-using BWay.Service.DTOs;
+﻿using BWay.Infra.DTOs;
+using BWay.Infra.Models;
+using BWay.Repository.Interfaces;
 using BWay.Service.Interfaces;
 
 namespace BWay.Service.Services
@@ -15,51 +14,78 @@ namespace BWay.Service.Services
             _operacaoRepository = operacaoRepository;
         }
 
-        public OperacaoDTO CriarOperacao(OperacaoDTO operacao)
+        #region Operacao
+        public List<OperacaoDTO> ListarOperacao()
         {
-            OperacaoModel operacaoModel = OperacaoConverter.OperacaoDTOToOperacaoModel(operacao);
-
-            var operacaoCriada = _operacaoRepository.CriarOperacao(operacaoModel);
-
-            return OperacaoConverter.OperacaoModelToOperacaoDTO(operacaoCriada);
+            try
+            {
+                return _operacaoRepository.ListarOperacao();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public OperacaoDTO AbrirOperacao(int id)
+        public OperacaoDTO BuscarOperacaoPorId(string idOperacao)
         {
-            var operacaoAberta = _operacaoRepository.AbrirOperacao(id);
-
-            return OperacaoConverter.OperacaoModelToOperacaoDTO(operacaoAberta);
+            try
+            {
+                return _operacaoRepository.BuscarOperacaoPorId(idOperacao);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public OperacaoDTO FecharOperacao(int id)
+        public string CadastrarOperacao(OperacaoModel operacao)
         {
-            var operacaoFechada = _operacaoRepository.FecharOperacao(id);
-
-            return OperacaoConverter.OperacaoModelToOperacaoDTO(operacaoFechada);
+            try
+            {
+                return _operacaoRepository.CadastrarOperacao(operacao);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public OperacaoDTO ObterOperacaoAberta(int id)
+        public string AtualizarOperacao(string idOperacao, OperacaoModel operacao)
         {
-            var operacao = _operacaoRepository.ObterOperacaoAberta(id);
-
-            return operacao == null ? null : OperacaoConverter.OperacaoModelToOperacaoDTO(operacao);
+            try
+            {
+                return _operacaoRepository.AtualizarOperacao(idOperacao, operacao);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public OperacaoDTO ObterOperacao(int id)
+        public string AtualizarCodigoOperacao(string idOperacao, string codigoOperacao)
         {
-            var operacao = _operacaoRepository.ObterOperacao(id);
-
-            return operacao == null ? null : OperacaoConverter.OperacaoModelToOperacaoDTO(operacao);
+            try
+            {
+                return _operacaoRepository.AtualizarCodigoOperacao(idOperacao, codigoOperacao);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public List<OperacaoDTO> ObterOperacoes()
+        public string ExcluirOperacao(string idOperacao)
         {
-            var operacoes = _operacaoRepository.ObterOperacoes();
-            List<OperacaoDTO> operacoesDTO = new List<OperacaoDTO>();
-
-            operacoes.ForEach(operacao => operacoesDTO.Add(OperacaoConverter.OperacaoModelToOperacaoDTO(operacao)));
-
-            return operacoesDTO;
+            try
+            {
+                return _operacaoRepository.ExcluirOperacao(idOperacao);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
+        #endregion
     }
 }

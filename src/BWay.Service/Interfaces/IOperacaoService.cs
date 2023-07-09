@@ -1,14 +1,17 @@
-﻿using BWay.Service.DTOs;
+﻿using BWay.Infra.DTOs;
+using BWay.Infra.Models;
 
 namespace BWay.Service.Interfaces
 {
     public interface IOperacaoService
     {
-        OperacaoDTO CriarOperacao(OperacaoDTO operacao);
-        OperacaoDTO AbrirOperacao(int id);
-        OperacaoDTO FecharOperacao(int id);
-        OperacaoDTO ObterOperacaoAberta(int id);
-        OperacaoDTO ObterOperacao(int id);
-        List<OperacaoDTO> ObterOperacoes();
+        #region Operacao
+        List<OperacaoDTO> ListarOperacao();
+        OperacaoDTO BuscarOperacaoPorId(string idOperacao);
+        string CadastrarOperacao(OperacaoModel operacao);
+        string AtualizarOperacao(string idOperacao, OperacaoModel operacao);
+        string AtualizarCodigoOperacao(string idOperacao, string codigoOperacao);
+        string ExcluirOperacao(string idOperacao);
+        #endregion
     }
 }
