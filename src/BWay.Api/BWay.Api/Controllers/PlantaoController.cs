@@ -38,7 +38,7 @@ namespace BWay.Api.Controllers
         }
 
         [HttpGet("localizacaoplantao/consultarPorId/{idLocalizacaoPlantao}")]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(LocalizacaoPlantaoDTO), StatusCodes.Status200OK)]
         public IActionResult BuscarLocalizacaoPlantaoPorId(string idLocalizacaoPlantao)
         {
             try
@@ -136,7 +136,7 @@ namespace BWay.Api.Controllers
         }
 
         [HttpGet("consultarPorId/{idPlantao}")]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PlantaoDTO), StatusCodes.Status200OK)]
         public IActionResult BuscarPlantaoPorId(string idPlantao)
         {
             try
